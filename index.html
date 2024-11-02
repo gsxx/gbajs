@@ -283,18 +283,6 @@ document.addEventListener('webkitfullscreenchange', function() {
 	}
 }, false);
 
-function loadGame() {
-    // Crear una solicitud para cargar el archivo game.gb
-    fetch('game.gb')
-        .then(response => response.arrayBuffer())
-        .then(buffer => {
-            // Llamar a la función run con el contenido del archivo
-            run(new Uint8Array(buffer));
-        })
-        .catch(error => {
-            console.error('Error al cargar el juego:', error);
-        });
-}
 </script>
 </head>
 <body>
@@ -323,5 +311,24 @@ function loadGame() {
 		<p id="openDebug" onclick="enableDebug()">Debugger</p>
 	</div>
 </section>
+
+<script>
+// Función original de carga de ROM
+function loadROM(url) {
+    fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(buffer => {
+            const gameData = new Uint8Array(buffer);
+            gba.loadRom(gameData);
+        })
+        .catch(error => {
+            console.error("Error al cargar el ROM:", error);
+        });
+}
+
+// Llama a la función con la URL del ROM en tu servidor
+loadROM('/game.gb');
+
+</script>
 </body>
 </html>
