@@ -319,7 +319,7 @@ function loadROM(url) {
         .then(response => response.arrayBuffer())
         .then(buffer => {
             const gameData = new Uint8Array(buffer);
-            gba.loadRom(gameData);
+            run(gameData);
         })
         .catch(error => {
             console.error("Error al cargar el ROM:", error);
@@ -327,7 +327,7 @@ function loadROM(url) {
 }
 
 // Llama a la función con la URL del ROM en tu servidor
-loadROM('/game.gb');
+loadROM('/game.gba');
 
 </script>
 </body>
